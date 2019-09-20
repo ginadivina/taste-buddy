@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
+    {{mymap.js}}
+</head>
 <div class="container">
     {% if user %}
     <h1>Hello, {{ user.username }}! This is the search page.</h1>
@@ -22,6 +25,7 @@
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
-
+    <br>
+    {{mymap.html}}
 </div>
 {% endblock %}
