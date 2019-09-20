@@ -1,5 +1,11 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, request
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from app import app
+
+
+class SearchForm(Form):
+    location = StringField('Location:', validators=[validators.required()])
+    food = StringField('Food type:', validators=[validators.required()])
 
 
 @app.route('/')
@@ -34,9 +40,16 @@ def review():
     return render_template('review.html')
 
 
-@app.route('/search')
+@app.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template('search.html')
+    search_form = SearchForm(request.form)
+
+    if request.method == 'POST':
+        location=request.form['location']
+        radius=request.form['radius']
+        food=request.form['food']
+
+    return render_template('search.html', form=search_form)
 
 
 @app.errorhandler(404)

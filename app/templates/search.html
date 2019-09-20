@@ -7,5 +7,20 @@
     {% else %}
     <h1>This is the search page!</h1>
     {% endif %}
+    <form  action="" method="post" role="form">
+        {{ form.csrf }}
+        <div class="form-group">
+            <label for="food">Food:</label>
+            <input type="text" class="form-control" id="food" name="food" placeholder="Food">
+            <br>
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Location">
+            <br>
+            <label for="radius">Radius:</label>
+            <input type="text" class="form-control" id="radius" name="radius" placeholder="Radius">
+            <br>
+        </div>
+    </form>
+
 </div>
 {% endblock %}
