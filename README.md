@@ -15,3 +15,5 @@ Start app:
 
 Leave virtual environment:
 `deactivate`
+
+The db.db file can be explored with a DB explorer such as: <https://sqlitebrowser.org/>
