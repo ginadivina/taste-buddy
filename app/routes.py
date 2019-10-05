@@ -53,6 +53,7 @@ def search():
     if request.method == 'POST':
         location=request.form['location']
         radius=request.form['radius']
+        price=request.form['price']
         food=request.form['food']
 
     # creating a map in the view
