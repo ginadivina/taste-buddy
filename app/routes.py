@@ -2,6 +2,7 @@ from flask import render_template, url_for, request
 from flask_googlemaps import GoogleMaps, Map
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from app import app
+from app.database import db_search
 
 GoogleMaps(
     app,
@@ -49,7 +50,7 @@ def search():
         radius=request.form['radius']
         price = request.form['price']
         food=request.form['food']
-
+        db_search()
     # creating a map in the view
     mymap = Map(
         identifier="view-side",
