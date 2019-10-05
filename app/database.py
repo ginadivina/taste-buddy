@@ -27,7 +27,7 @@ def db_search():
     try:
         db = create_connection()
         cursor = db.cursor()
-        cursor.execute('''SELECT Address FROM Restaurants''')
+        cursor.execute('''SELECT FullAddress FROM Restaurants''')
         restaurant_1 = cursor.fetchone()  # Retrieve the first row
 
     except Exception as e:

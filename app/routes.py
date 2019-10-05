@@ -3,12 +3,16 @@ from flask_googlemaps import GoogleMaps, Map
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from app import app
 from app.database import db_search
+import requests
+
+google_maps_key = "AIzaSyCsQCeigbcKX6ru5F_kCarl-fbmOgL3J8M"
 
 GoogleMaps(
     app,
-    key="AIzaSyCsQCeigbcKX6ru5F_kCarl-fbmOgL3J8M"  # This API key is restricted by IP address, you can put your own
+    key=google_maps_key  # This API key is restricted by IP address, you can put your own
     # Google Maps API key here
 )
+
 
 @app.route('/')
 @app.route('/index')
@@ -50,14 +54,24 @@ def search():
         radius=request.form['radius']
         price = request.form['price']
         food=request.form['food']
-        db_search()
-    # creating a map in the view
-    mymap = Map(
-        identifier="view-side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
-    )
+        restaurant = db_search()
+        geocode = (requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + restaurant + '&key=' + google_maps_key)).json()
+        restaurant_lat = geocode['results'][0]['geometry']['location']['lat']
+        restaurant_lng = geocode['results'][0]['geometry']['location']['lng']
+        mymap = Map(
+            identifier="view-side",
+            lat=restaurant_lat,
+            lng=restaurant_lng,
+            markers=[(restaurant_lat, restaurant_lng)]
+        )
+    else:
+        # creating a map in the view
+        mymap = Map(
+            identifier="view-side",
+            lat=37.4419,
+            lng=-122.1419,
+            markers=[(37.4419, -122.1419)]
+        )
 
     return render_template('search.html', mymap=mymap)
 
