@@ -3,27 +3,15 @@
 {% block content %}
 <head>
     {{mymap.js}}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{
-    url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
-    <script type=text/javascript>
-        $(function() {
-            $(".dropdown-menu li a").click(function(){
-
-                $(this).parents(".btn-group").find('.selection').text($(this).text());
-                $(this).parents(".btn-group").find('.selection').val($(this).text());
-            });
-        });
-    </script>
 </head>
+
 <div class="container">
     {% if user %}
     <h1>Hello, {{ user.username }}! This is the search page.</h1>
     {% else %}
     <h1>This is the search page!</h1>
     {% endif %}
-    <form  action="" method="post" role="form">
-        {{ form.csrf }}
+    <form  action="{{ url_for('search') }}" method="post" role="form">
         <div class="form-group">
             <label for="food">Food</label>
             <input type="text" class="form-control" id="food" name="food" placeholder="Food">
@@ -34,17 +22,13 @@
             <label for="radius">Radius</label>
             <input type="text" class="form-control" id="radius" name="radius" placeholder="Radius">
             <br>
-            <label for="price">Price</label>
+            <label>Price</label>
             <br>
-            <div class="btn-group">
-                <button class="btn btn-default dropdown-toggle" id="price" type="button" data-toggle="dropdown">
-                    <span class="selection">$</span><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">$</a></li>
-                    <li><a href="#">$$</a></li>
-                    <li><a href="#">$$$</a></li>
-                </ul>
-            </div>
+            <select class="form-control" name="price">
+                <option value="$"><a>$</a></option>
+                <option value="$$"><a>$$</a></option>
+                <option value="$$$"><a>$$$</a></option>
+            </select>
 
         </div>
         <button type="submit" class="btn btn-success">Submit</button>

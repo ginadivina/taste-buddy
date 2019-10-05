@@ -9,11 +9,6 @@ GoogleMaps(
     # Google Maps API key here
 )
 
-class SearchForm(Form):
-    location = StringField('Location:', validators=[validators.required()])
-    food = StringField('Food type:', validators=[validators.required()])
-
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -48,12 +43,11 @@ def review():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    search_form = SearchForm(request.form)
 
     if request.method == 'POST':
         location=request.form['location']
         radius=request.form['radius']
-        price=request.form['price']
+        price = request.form['price']
         food=request.form['food']
 
     # creating a map in the view
@@ -64,7 +58,7 @@ def search():
         markers=[(37.4419, -122.1419)]
     )
 
-    return render_template('search.html', form=search_form, mymap=mymap)
+    return render_template('search.html', mymap=mymap)
 
 
 @app.errorhandler(404)
