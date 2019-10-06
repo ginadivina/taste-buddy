@@ -9,3 +9,47 @@
     {% endif %}
 </div>
 {% endblock %}
+
+<body>
+    <h3>
+        Please select the meal you would like to review:
+        <select>
+                #Should read from user's history but this will do for now
+                <option value="meal1">Ramen from Jim's Cookhouse</option>
+                <option value="meal2">Ramen from Tokyo Ramen</option>
+                <option value="meal3">Stake Sandwich from The Sandwich Shack</option>
+                <option value="meal4">Chicken Nuggets from McDonald's</option>
+              </select>
+    </h3>
+    <h3><br>Rate this meal: </h3>
+
+    <head>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" type="text/css" href="star_rating.css">
+            <title>Star rating using CSS</title>
+          </head>
+          
+          <body>
+            <div class="rate">
+              <input type="radio" id="star5" name="rate" value="5" />
+              <label for="star5" title="text">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" />
+              <label for="star4" title="text">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" />
+              <label for="star3" title="text">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" />
+              <label for="star2" title="text">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" />
+              <label for="star1" title="text">1 star</label>
+            </div>
+          </body>
+    
+          <form>
+                <br><br><br> Enter your review here:<br>
+                <input type="text" name="user_review"> <br>
+                <input type="submit" name="submit">
+                <br>
+              </form>
+
+</body>
+#Todo: link info to database
