@@ -16,13 +16,17 @@
             <form  action="{{ url_for('search') }}" method="post" role="form">
                 <div class="form-group">
                     <label for="food">Food</label>
-                    <input type="text" class="form-control" id="food" name="food" placeholder="Food">
+                    <input type="text" class="form-control" id="food" name="food" placeholder="Food" required>
                     <br>
                     <label for="location">Location</label>
-                    <input type="text" class="form-control" id="location" name="location" placeholder="Location">
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
                     <br>
-                    <label for="radius">Radius</label>
-                    <input type="text" class="form-control" id="radius" name="radius" placeholder="Radius">
+                    <label>Radius</label>
+                    <select class="form-control" name="radius">
+                        <option value="1"><a>1km</a></option>
+                        <option value="5"><a>5km</a></option>
+                        <option value="10"><a>10km</a></option>
+                    </select>
                     <br>
                     <label>Price</label>
                     <br>
