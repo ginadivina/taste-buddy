@@ -62,7 +62,8 @@ def search():
             identifier="view-side",
             lat=restaurant_lat,
             lng=restaurant_lng,
-            markers=[(restaurant_lat, restaurant_lng)]
+            markers=[(restaurant_lat, restaurant_lng)],
+            style="height:600px;width:900px"
         )
     else:
         # creating a map in the view
@@ -70,7 +71,8 @@ def search():
             identifier="view-side",
             lat=37.4419,
             lng=-122.1419,
-            markers=[(37.4419, -122.1419)]
+            markers=[(37.4419, -122.1419)],
+            style="height:600px;width:900px"
         )
 
     return render_template('search.html', mymap=mymap)

@@ -11,45 +11,51 @@
     {% else %}
     <h1>This is the search page!</h1>
     {% endif %}
-    <form  action="{{ url_for('search') }}" method="post" role="form">
-        <div class="form-group">
-            <label for="food">Food</label>
-            <input type="text" class="form-control" id="food" name="food" placeholder="Food">
-            <br>
-            <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Location">
-            <br>
-            <label for="radius">Radius</label>
-            <input type="text" class="form-control" id="radius" name="radius" placeholder="Radius">
-            <br>
-            <label>Price</label>
-            <br>
-            <select class="form-control" name="price">
-                <option value="$"><a>$</a></option>
-                <option value="$$"><a>$$</a></option>
-                <option value="$$$"><a>$$$</a></option>
-            </select>
+    <div class="row">
+        <div class="col-sm-3">
+            <form  action="{{ url_for('search') }}" method="post" role="form">
+                <div class="form-group">
+                    <label for="food">Food</label>
+                    <input type="text" class="form-control" id="food" name="food" placeholder="Food">
+                    <br>
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Location">
+                    <br>
+                    <label for="radius">Radius</label>
+                    <input type="text" class="form-control" id="radius" name="radius" placeholder="Radius">
+                    <br>
+                    <label>Price</label>
+                    <br>
+                    <select class="form-control" name="price">
+                        <option value="$"><a>$</a></option>
+                        <option value="$$"><a>$$</a></option>
+                        <option value="$$$"><a>$$$</a></option>
+                    </select>
 
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-    <br>
-    {{mymap.html}}
-    <div id="googleMap" style="width:100%;height:400px;">
-
-        <script>
-        function myMap() {
-        var mapProp= {
-        center:new google.maps.LatLng(51.508742,-0.120850),
-        zoom:1,
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
-        </script>
-
-        <script
-        src="https://maps.googleapis.com/maps/api/js?key=API_KEY_GOES_HERE&callback=myMap">
-        </script>
+        <div class="col-md-9">
+            {{mymap.html}}
+        </div>
     </div>
+    <br>
+
+    <!--<div id="googleMap" style="width:100%;height:400px;">-->
+        <!--<script>-->
+        <!--function myMap() {-->
+        <!--var mapProp= {-->
+        <!--center:new google.maps.LatLng(51.508742,-0.120850),-->
+        <!--zoom:1,-->
+        <!--};-->
+        <!--var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);-->
+        <!--}-->
+        <!--</script>-->
+
+        <!--<script-->
+        <!--src="https://maps.googleapis.com/maps/api/js?key=API_KEY_GOES_HERE&callback=myMap">-->
+        <!--</script>-->
+    <!--</div>-->
 </div>
 {% endblock %}
