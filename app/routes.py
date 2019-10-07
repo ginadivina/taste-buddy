@@ -69,9 +69,8 @@ def search():
         # creating a map in the view
         mymap = Map(
             identifier="view-side",
-            lat=37.4419,
-            lng=-122.1419,
-            markers=[(37.4419, -122.1419)],
+            lat=-33.8688,
+            lng=151.2093,
             style="height:600px;width:900px"
         )
 
