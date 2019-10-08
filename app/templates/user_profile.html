@@ -28,6 +28,7 @@
                         <li><a href="{{ url_for('review') }}">Add review</a></li>
                         <li><a href="{{ url_for('sign_in') }}">Sign in</a></li>
                         <li><a href="{{ url_for('sign_out') }}">Sign out</a></li>
+                        <li><a href="{{ url_for('user_profile') }}">User Profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{ url_for('upload') }}">Upload menu</a></li>
                     </ul>
@@ -40,6 +41,17 @@
 
 {% block content %}
 <div class="container">
-   put stuff here!!!!!!
+   <table style="width:100%">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+    </table>     
 </div>
 {% endblock %}
