@@ -1,4 +1,10 @@
 {% extends 'bootstrap/base.html' %}
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
 
 {% block navbar %}
 <nav class="navbar navbar-default">
@@ -41,12 +47,6 @@
 
 {% block content %}
 <div class="container">
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-</style>
    <table style="width:100%">
   <tr>
     <th>Firstname</th>
