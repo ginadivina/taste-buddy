@@ -27,7 +27,7 @@ def db_search():
     try:
         db = create_connection()
         cursor = db.cursor()
-        cursor.execute('''SELECT FullAddress FROM Restaurants''')
+        cursor.execute('''SELECT FullAddress, RestaurantName FROM Restaurants''')
         restaurants = cursor.fetchall()  # Retrieve all results
 
     except Exception as e:

@@ -61,7 +61,7 @@ def search():  # Our main search page interface
         food = request.form['food']
 
         restaurants = db_search()  # Search DB
-
+        print(restaurants[0][1])
         restaurant_markers = []  # Init variables we will be using
         i = 0
 
@@ -70,10 +70,11 @@ def search():  # Our main search page interface
                 restaurants[i]) + '&key=' + google_maps_key)).json()
             restaurant_lat = geocode['results'][0]['geometry']['location']['lat']
             restaurant_lng = geocode['results'][0]['geometry']['location']['lng']
+            restaurant_name = restaurants[i][1]
             restaurant_markers.append({
                 'lat': restaurant_lat,
                 'lng': restaurant_lng,
-                'infobox': '<h1>Tokyo Ramen</h1><br>'
+                'infobox': '<h1>' + restaurant_name + '</h1><br>'
                            '<span class="fa fa-star checked"></span>'
                            '<span class="fa fa-star checked"></span>'
                            '<span class="fa fa-star checked"></span>'
