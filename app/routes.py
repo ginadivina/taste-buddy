@@ -73,12 +73,14 @@ def search():  # Our main search page interface
             restaurant_markers.append({
                 'lat': restaurant_lat,
                 'lng': restaurant_lng,
-                'infobox': '<b>Tokyo Ramen</b><br>'
+                'infobox': '<h1>Tokyo Ramen</h1><br>'
                            '<span class="fa fa-star checked"></span>'
                            '<span class="fa fa-star checked"></span>'
                            '<span class="fa fa-star checked"></span>'
                            '<span class="fa fa-star"></span>'
-                           '<span class="fa fa-star"></span>'
+                           '<span class="fa fa-star"></span><b>(27)</b>'
+                           '<img src="/static/deliveroo.jpg"style="width:50px;height:50px;">'
+                           '<img src="/static/menulog.jpg"style="width:50px;height:50px;">'
             })
             i += 1
 

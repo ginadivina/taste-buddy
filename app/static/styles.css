@@ -42,5 +42,9 @@
     color: orange;
 }
 
+img {
+    width: 25px;
+    height: 25px;
+}
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
 /* And then stolen from: https://codepen.io/tammykimkim/pen/yegZRw */
