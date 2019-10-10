@@ -52,26 +52,46 @@ def review():
 
 
 @app.route('/search', methods=['GET', 'POST'])
-def search():
-
+def search():  # Our main search page interface
     if request.method == 'POST':
-        location=request.form['location']
-        radius=request.form['radius']
+        #  Take inputs
+        location = request.form['location']
+        radius = request.form['radius']
         price = request.form['price']
-        food=request.form['food']
-        restaurant = db_search()
-        geocode = (requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + restaurant + '&key=' + google_maps_key)).json()
-        restaurant_lat = geocode['results'][0]['geometry']['location']['lat']
-        restaurant_lng = geocode['results'][0]['geometry']['location']['lng']
+        food = request.form['food']
+
+        restaurants = db_search()  # Search DB
+
+        restaurant_markers = []  # Init variables we will be using
+        i = 0
+
+        while i < len(restaurants):  # Loop through the restaurants found in DB
+            geocode = (requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + str(
+                restaurants[i]) + '&key=' + google_maps_key)).json()
+            restaurant_lat = geocode['results'][0]['geometry']['location']['lat']
+            restaurant_lng = geocode['results'][0]['geometry']['location']['lng']
+            restaurant_markers.append({
+                'lat': restaurant_lat,
+                'lng': restaurant_lng,
+                'infobox': '<b>Tokyo Ramen</b><br>'
+                           '<span class="fa fa-star checked"></span>'
+                           '<span class="fa fa-star checked"></span>'
+                           '<span class="fa fa-star checked"></span>'
+                           '<span class="fa fa-star"></span>'
+                           '<span class="fa fa-star"></span>'
+            })
+            i += 1
+
+        # Render updated map and markers
         mymap = Map(
             identifier="view-side",
-            lat=restaurant_lat,
-            lng=restaurant_lng,
-            markers=[(restaurant_lat, restaurant_lng)],
+            lat=restaurant_markers[0]['lat'],
+            lng=restaurant_markers[0]['lng'],
+            markers=restaurant_markers,
             style="height:600px;width:900px"
         )
     else:
-        # creating a map in the view
+        # Default map view
         mymap = Map(
             identifier="view-side",
             lat=-33.8688,

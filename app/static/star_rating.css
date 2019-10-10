@@ -38,5 +38,9 @@
     color: #c59b08;
 }
 
+.checked {
+    color: orange;
+}
+
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
 /* And then stolen from: https://codepen.io/tammykimkim/pen/yegZRw */

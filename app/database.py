@@ -28,9 +28,9 @@ def db_search():
         db = create_connection()
         cursor = db.cursor()
         cursor.execute('''SELECT FullAddress FROM Restaurants''')
-        restaurant_1 = cursor.fetchone()  # Retrieve the first row
+        restaurants = cursor.fetchall()  # Retrieve all results
 
     except Exception as e:
         print(e)
 
-    return restaurant_1[0]
+    return restaurants

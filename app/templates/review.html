@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
+    <meta charset="UTF-8">
+</head>
+
 <div class="container">
     {% if user %}
     <h1>Hello, {{ user.username }}! This is the add a review page.</h1>
@@ -22,11 +26,7 @@
 </h3>
 <h3><br>Rate this meal: </h3>
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="star_rating.css">
-    <title>Star rating using CSS</title>
-</head>
+
 
 <body>
 <div class="rate">
