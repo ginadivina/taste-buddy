@@ -41,6 +41,11 @@ def history():
     return render_template('history.html')
 
 
+@app.route('/user_profile')
+def user_profile():
+    return render_template('user_profile.html')
+
+
 @app.route('/review')
 def review():
     return render_template('review.html')

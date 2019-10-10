@@ -1,4 +1,4 @@
-{% extends 'bootstrap/base.html' %}
+{% extends "base.html" %}
 <style>
  .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -36,45 +36,6 @@ button:hover, a:hover {
   opacity: 0.7;
 }
 </style>
-
-{% block navbar %}
-<nav class="navbar navbar-default">
-
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <i class="glyphicon glyphicon-leaf" style = "color : #e95809; font-size: 45px;"></i>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <a class="navbar-brand" style = "color : #e95809; font-size: 45px; padding-left: 40px;" href="{{ url_for('index') }}">Taste Buddy</a>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url_for('search') }}">Search <span class="sr-only">(current)</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('history') }}">History</a></li>
-                        <li><a href="{{ url_for('review') }}">Add review</a></li>
-                        <li><a href="{{ url_for('sign_in') }}">Sign in</a></li>
-                        <li><a href="{{ url_for('sign_out') }}">Sign out</a></li>
-                        <li><a href="{{ url_for('user_profile') }}">User Profile</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ url_for('upload') }}">Upload menu</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-{% endblock %}
 
 {% block content %}
 <div class="container">
