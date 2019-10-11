@@ -17,3 +17,9 @@ Leave virtual environment:
 `deactivate`
 
 The db.db file can be explored with a DB explorer such as: <https://sqlitebrowser.org/>
+
+Testing:
+`coverage run test_run.py`
+
+Test coverage report:
+`coverage report`
