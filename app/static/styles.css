@@ -42,9 +42,15 @@
     color: orange;
 }
 
-img {
-    width: 25px;
-    height: 25px;
+.carousel .item {
+    height: 300px;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
 }
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
 /* And then stolen from: https://codepen.io/tammykimkim/pen/yegZRw */
