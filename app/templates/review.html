@@ -3,55 +3,64 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="styles.css" />-->
 </head>
 
-<div class="container">
+<style>
+div {
+    margin-left: 30px;
+    margin-right: 100px;
+}
+</style>
+
+<div>
     {% if user %}
-    <h1>Hello, {{ user.username }}! This is the add a review page.</h1>
+    <h1>Hello, {{ user.username }}! This is the review page.</h1>
     {% else %}
-    <h1>This is the add a review page!</h1>
+    <h1>This is the review page!</h1>
     {% endif %}
+    <p>Here you can rate and review the meals you've eaten.</p>
 </div>
-
-<body>
-<h3>
-    Please select the meal you would like to review:
-    <select>
-        #Should read from user's history but this will do for now
-        <option value="meal1">Ramen from Jim's Cookhouse</option>
-        <option value="meal2">Ramen from Tokyo Ramen</option>
-        <option value="meal3">Stake Sandwich from The Sandwich Shack</option>
-        <option value="meal4">Chicken Nuggets from McDonald's</option>
-    </select>
-</h3>
-<h3><br>Rate this meal: </h3>
-
-
-
-<body>
-<div class="rate">
-    <input type="radio" id="star5" name="rate" value="5" />
-    <label for="star5" title="text">5 stars</label>
-    <input type="radio" id="star4" name="rate" value="4" />
-    <label for="star4" title="text">4 stars</label>
-    <input type="radio" id="star3" name="rate" value="3" />
-    <label for="star3" title="text">3 stars</label>
-    <input type="radio" id="star2" name="rate" value="2" />
-    <label for="star2" title="text">2 stars</label>
-    <input type="radio" id="star1" name="rate" value="1" />
-    <label for="star1" title="text">1 star</label>
-</div>
-</body>
 
 <form>
-    <br><br><br> Enter your review here:<br>
-    <input type="text" name="user_review"> <br>
-    <input type="submit" name="submit">
+    <div class="form-group">    
+        <h3>
+            <label for="selecting">Please select the meal you would like to review: </label>
+            <select class = "form-control" name = "rating" id="selecting">
+                <option value="meal1"><a>Ramen from Jim's Cookhouse</a></option>
+                <option value="meal2"><a>Ramen from Tokyo Ramen</a></option>
+                <option value="meal3"><a>Stake Sandwich from The Sandwich Shack</a></option>
+                <option value="meal4"><a>Chicken Nuggets from McDonald's</a></option>
+            </select>
+        </h3>
+    </div>
     <br>
+
+    <div>
+        <h3>
+            <label>Please rate this meal:</label>
+        </h3>
+        <input type="radio" id="star5" name="rate" value="5" />
+        <label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="rate" value="4" />
+        <label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="rate" value="3" />
+        <label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="rate" value="2" />
+        <label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="rate" value="1" />
+        <label for="star1" title="text">1 star</label>
+    </div>
+    <br>
+
+    <div class="form-group">
+        <h3>
+            <label for="textarea">Enter your review here:</label>
+        </h3>
+        <textarea class="form-control" id="textarea" rows="4"></textarea>
+        <br>
+        <button type="button" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
-</body>
 {% endblock %}
-
-
-#Todo: link info to database
