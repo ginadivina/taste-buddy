@@ -5,7 +5,13 @@
     {% if user %}
     <h1>Hello, {{ user.username }}! This is the sign in page.</h1>
     {% else %}
-    <h1>This is the sign in page!</h1>
+    <input type="text" name="email" placeholder="Enter Email" id="email" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
     {% endif %}
 </div>
 {% endblock %}
