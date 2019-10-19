@@ -25,6 +25,10 @@ def index():
 def upload():
     return render_template('upload.html')
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 
 @app.route('/sign_in')
 def sign_in():
