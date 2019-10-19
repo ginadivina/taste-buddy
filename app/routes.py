@@ -29,12 +29,12 @@ def upload():
 def register():
     msg = ''
     conn = db_search.connect()
-	cursor = conn.cursor()
-            # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cursor.execute('INSERT INTO UserInfo VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
-            conn.commit()
-            msg = 'You have successfully registered!'
-            conn.close()
+    cursor = conn.cursor()
+    # Account doesnt exists and the form data is valid, now insert new account into accounts table
+    cursor.execute('INSERT INTO UserInfo VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
+    conn.commit()
+    msg = 'You have successfully registered!'
+    conn.close()
  
     return render_template('register.html', msg=msg)
   
@@ -50,7 +50,7 @@ def sign_in():
         password = request.form['password']
         # Check if account exists using db_search
         conn = db_search.connect()
-		cursor = conn.cursor()
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM UserInfo WHERE email = %s AND password = %s', (email, password))
         # Fetch one record and return result
         account = cursor.fetchone()
@@ -88,6 +88,10 @@ def user_profile():
 @app.route('/review')
 def review():
     return render_template('review.html')
+
+@app.route('/thanks')
+def thanks():
+    return render_template('thanks.html')
 
 
 @app.route('/search', methods=['GET', 'POST'])
