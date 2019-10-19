@@ -28,10 +28,13 @@ def upload():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
+    conn = sqlite3.connect('my_database.sqlite')
+    cursor = conn.cursor()
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
-            db_search.connection.commit()
+            cursor.execute('INSERT INTO UserInfo VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
+            conn.commit()
             msg = 'You have successfully registered!'
+            conn.close()
  
     return render_template('register.html', msg=msg)
   
