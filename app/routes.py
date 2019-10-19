@@ -25,9 +25,16 @@ def index():
 def upload():
     return render_template('upload.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    msg = ''
+            # Account doesnt exists and the form data is valid, now insert new account into accounts table
+            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
+            db_search.connection.commit()
+            msg = 'You have successfully registered!'
+ 
+    return render_template('register.html', msg=msg)
+  
 
 
 @app.route('/sign_in')
