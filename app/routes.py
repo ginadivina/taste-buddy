@@ -28,8 +28,8 @@ def upload():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
-    conn = sqlite3.connect('my_database.sqlite')
-    cursor = conn.cursor()
+    conn = db_search.connect()
+	cursor = conn.cursor()
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             cursor.execute('INSERT INTO UserInfo VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (Fname, Lname, DOB, Address, State, PostCode, Email, Phone, Password))
             conn.commit()
@@ -40,9 +40,34 @@ def register():
   
 
 
-@app.route('/sign_in')
+@app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
-    return render_template('sign_in.html')
+    msg = ''
+    # Check if "username" and "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        # Create variables for easy access
+        username = request.form['email']
+        password = request.form['password']
+        # Check if account exists using db_search
+        conn = db_search.connect()
+		cursor = conn.cursor()
+        cursor.execute('SELECT * FROM UserInfo WHERE email = %s AND password = %s', (email, password))
+        # Fetch one record and return result
+        account = cursor.fetchone()
+        # If account exists in accounts table in out database
+        if account:
+            # Create session data, we can access this data in other routes
+            session['loggedin'] = True
+            session['id'] = account['id']
+            session['email'] = account['username']
+            # Redirect to home page
+            return 'Logged in successfully!'
+        else:
+            # Account doesnt exist or username/password incorrect
+            msg = 'Incorrect email/password!'
+    # Show the login form with message (if any)
+    return render_template('sign_in.html', msg=msg)
+
 
 
 @app.route('/sign_out')
