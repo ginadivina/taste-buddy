@@ -45,6 +45,19 @@ class TestCase(unittest.TestCase):
             response = c.get('/search')
             assert response.status_code == 200
 
+    def test_most_similar(self):
+        with app.test_client() as c:
+            response = c.get('/most_similar_items', query_string={'food_id':1})
+            assert response.status_code == 200
+
+    # def test_upload_csv(self):
+    #     with app.test_client() as c:
+    #         with open('uploads/dummy_menu.csv', 'rb') as f:
+    #             data = dict(file=(f, "dummy_menu.csv"))
+
+    #         response = c.post('/upload', content_type='multipart/form-data', data=data)
+    #         assert response.status_code == 200
+
 
 if __name__ == '__main__':
     unittest.main()
