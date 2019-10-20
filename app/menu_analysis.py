@@ -34,8 +34,10 @@ class MenuItem():
         return self.description_nlp.similarity(other_menu_item.description_nlp)
 
 def import_menu_csv(csv_path):
+    print('Importing menu...')
     menu = []
     df = pd.read_csv(csv_path)
+    print(df)
     if not (set(['name', 'description', 'price', 'restaurant_id']).issubset(set(df.keys()))):
         raise Exception("Menu CSV must have columns 'name', 'description', 'price'")
 

@@ -2,10 +2,9 @@
 
 {% block content %}
 <div class="container">
-    {% if user %}
-    <h1>Hello, {{ user.username }}! This is the upload page.</h1>
-    {% else %}
-    <h1>This is the upload page!</h1>
-    {% endif %}
+    <h1>Upload Menu CSV</h1>
+    <form method=post enctype=multipart/form-data> <input type=file name=file>
+        <input type=submit value=Upload>
+    </form>
 </div>
 {% endblock %}

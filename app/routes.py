@@ -1,8 +1,10 @@
-from flask import render_template, url_for, request
+from flask import flash, request, redirect, render_template, url_for, request
 from flask_googlemaps import GoogleMaps, Map
+from werkzeug.utils import secure_filename
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from app import app
-from app.database import db_search
+from app.database import db_search, add_menu
+import os
 import requests
 
 google_maps_key = "AIzaSyCsQCeigbcKX6ru5F_kCarl-fbmOgL3J8M"
@@ -13,6 +15,8 @@ GoogleMaps(
     # Google Maps API key here
 )
 
+app.config['UPLOAD_FOLDER'] = 'uploads'
+# add_menu('uploads/dummy_menu.csv')
 
 @app.route('/')
 @app.route('/index')
@@ -21,9 +25,30 @@ def index():
     return render_template('base.html', title='Home', user=user)
 
 
-@app.route('/upload')
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    return render_template('upload.html')
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return redirect(request.url)
+
+        print(os.path.exists(app.config['UPLOAD_FOLDER']))
+        file = request.files['file']
+
+        if file and file.filename.endswith('.csv'):
+            filename = secure_filename(file.filename)
+            csv_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            
+            try:
+                file.save(csv_path)
+                print(csv_path)
+                add_menu(csv_path)
+            except Exception as e:
+                print(f'Failed to import menu. Details: {e}')
+
+            return redirect(url_for('upload'))
+
+    else:
+        return render_template('upload.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -37,8 +62,6 @@ def register():
     conn.close()
  
     return render_template('register.html', msg=msg)
-  
-
 
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
@@ -68,12 +91,9 @@ def sign_in():
     # Show the login form with message (if any)
     return render_template('sign_in.html', msg=msg)
 
-
-
 @app.route('/sign_out')
 def sign_out():
     return render_template('sign_out.html')
-
 
 @app.route('/history')
 def history():
@@ -84,7 +104,6 @@ def history():
 def user_profile():
     return render_template('user_profile.html')
 
-
 @app.route('/review')
 def review():
     return render_template('review.html')
@@ -92,7 +111,6 @@ def review():
 @app.route('/thanks')
 def thanks():
     return render_template('thanks.html')
-
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():  # Our main search page interface
