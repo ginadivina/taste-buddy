@@ -50,6 +50,7 @@ def import_menu_csv(csv_path):
 
 if __name__ == '__main__':
     menu_items = import_menu_csv('dummy_menu.csv')
+    print(menu_items[0].vector.dtype)
 
     for item_a, item_b in combinations(menu_items, 2):
         print('{} has {:.2%} similarity to {}'.format(item_a, item_a.similarity(item_b), item_b))

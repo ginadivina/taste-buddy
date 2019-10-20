@@ -1,9 +1,9 @@
-from flask import flash, request, redirect, render_template, url_for, request
+from flask import flash, request, redirect, render_template, url_for, request, jsonify
 from flask_googlemaps import GoogleMaps, Map
 from werkzeug.utils import secure_filename
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from app import app
-from app.database import db_search, add_menu
+from app.database import db_search, add_menu, get_n_most_similar
 import os
 import requests
 
@@ -49,6 +49,11 @@ def upload():
 
     else:
         return render_template('upload.html')
+
+
+@app.route('/most_similar_items', methods=['GET'])
+def most_similar_items():
+    return jsonify(get_n_most_similar(query_id=int(request.args.get('food_id')), N=5))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

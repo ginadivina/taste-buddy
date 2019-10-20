@@ -1,6 +1,7 @@
 import sqlite3
 import os.path
-from app.menu_analysis import import_menu_csv
+import numpy as np
+from app.menu_analysis import import_menu_csv, nlp
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_file = os.path.join(BASE_DIR, "db.db")
@@ -64,5 +65,48 @@ def add_menu(menu_csv_path):
         except Exception as e:
             print(e)
 
+def get_n_most_similar(query_id, N=5):
+
+    try:
+        db = create_connection()
+        cursor = db.cursor()
+        cursor.execute('''SELECT * FROM FoodItems''')
+        items = cursor.fetchall()
+
+        # Perform Fetch and Conversion
+        vecs = {}
+        food_items = {}
+        for food_id, food_name, semantic_vec_blob, description in items:
+            if semantic_vec_blob is not None:
+                vecs[food_id] = np.fromstring(semantic_vec_blob, dtype=np.float32)
+                food_items[food_id] = {
+                    'food_id': food_id,
+                    'food_name': food_name,
+                    'description': description
+                }
+
+        
+        # Perform Exhaustive Search
+        query_vec = vecs.pop(query_id)
+        similarities = []
+        for food_id, vec in vecs.items():
+            # Compute the cosine similarity
+            a, b = query_vec, vec
+            cos_sim = np.dot(a, b)/(np.linalg.norm(a)*np.linalg.norm(b))
+            similarities.append((food_id, cos_sim))
+
+        result = []
+        for _id, score in sorted(similarities, key=lambda x: x[1], reverse=True)[:N]:
+            result.append({
+                'food_item': food_items[_id],
+                'similarity_score': str(score)
+            })
+        return result
+
+    except Exception as e:
+        print(e)
+        return []
+
 if __name__ == '__main__':
-    add_menu('dummy_menu.csv')
+    # add_menu('dummy_menu.csv')
+    print(get_n_most_similar(query_id=11, N=10))
