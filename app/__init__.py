@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import Flask
 from flask_bootstrap import Bootstrap
 app = Flask(__name__)
